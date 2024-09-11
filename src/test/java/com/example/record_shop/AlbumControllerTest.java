@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -73,5 +74,17 @@ public class AlbumControllerTest {
                 .andExpect(content().json(objectMapper.writeValueAsString(mockAlbumList)));
     }
 
+    @Test
+    public void canRetrieveAlbumById() throws Exception {
+        // Arrange
+        given(albumManagerService.getAlbumById(1L))
+                .willReturn(Optional.of(mockAlbum1));
+
+        // Act & Assert
+        mockMvc.perform(get("/api/v1/records/1")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().json(objectMapper.writeValueAsString(mockAlbum1)));
+    }
 }
 
