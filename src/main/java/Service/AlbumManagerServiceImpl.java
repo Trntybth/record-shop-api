@@ -1,15 +1,23 @@
 package Service;
 
+import Repository.AlbumRepository;
 import model.Album;
 import model.Genre;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class AlbumManagerServiceImpl implements AlbumManagerService {
+
+
+    @Autowired
+    AlbumRepository albumRepository;
+
     @Override
     public List<Album> getAllAlbums() {
-        return List.of();
+        return new ArrayList<>(albumRepository.findAll());
     }
 
     @Override
