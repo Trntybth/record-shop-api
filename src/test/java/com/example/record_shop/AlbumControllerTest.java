@@ -17,11 +17,14 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -85,6 +88,28 @@ public class AlbumControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(mockAlbum1)));
+    }
+
+    @Test
+    public void canAddAlbumWithPostRequest() throws Exception {
+
+        given(albumManagerService.addNewAlbum(any(Album.class))).willReturn(mockAlbum2);
+        // Mock the response from getAllAlbums to include the new album
+        List<Album> mockAlbumList = Collections.singletonList(mockAlbum2);
+        given(albumManagerService.getAllAlbums()).willReturn(mockAlbumList);
+
+        // mock controller layer / api testing
+        mockMvc.perform(post("/api/v1/records")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(mockAlbum2)))
+                .andExpect(status().isCreated())
+                .andExpect(content().json(objectMapper.writeValueAsString(mockAlbum2)));
+
+        mockMvc.perform(get("/api/v1/records")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().json(objectMapper.writeValueAsString(mockAlbumList)));
+
     }
 }
 
