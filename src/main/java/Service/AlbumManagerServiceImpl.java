@@ -22,7 +22,7 @@ public class AlbumManagerServiceImpl implements AlbumManagerService {
 
     @Override
     public Optional<Album> getAlbumById(Long id) {
-        return Optional.empty();
+        return albumRepository.findById(id);
     }
 
     @Override
