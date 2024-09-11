@@ -52,7 +52,10 @@ public class AlbumManagerServiceImpl implements AlbumManagerService {
 
     @Override
     public Album addNewAlbum(Album album) {
-        return null;
+        if (album == null) {
+            throw new IllegalArgumentException("Album cannot be null.");
+        }
+        return albumRepository.save(album);
     }
 
     @Override
