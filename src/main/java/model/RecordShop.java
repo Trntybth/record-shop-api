@@ -6,23 +6,23 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
-@Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "record-shop")
 
-@Table(name = "album")
-public class Album {
+
+public class RecordShop {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
+
     private String artist;
     private int releaseYear;
     private Genre genre;
-
-
+    private boolean inStock;
+    private int numberInStock;
 }
