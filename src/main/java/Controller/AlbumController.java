@@ -28,5 +28,11 @@ public class AlbumController {
         return albumManagerService.getAlbumById(id);
     }
 
-
+    @PostMapping
+    public ResponseEntity<Album> addAlbum(@RequestBody Album album) {
+        if (album == null) {
+            return ResponseEntity.badRequest().build(); // return 400 bad request
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(albumManagerService.addNewAlbum(album));
+    }
 }
