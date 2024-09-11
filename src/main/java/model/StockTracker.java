@@ -18,5 +18,7 @@ public class StockTracker {
     private boolean inStock;
     private int numberInStock;
 
-
+    @OneToOne
+    @JoinColumn(name = "record_id", unique = true)
+    private Album record;
 }

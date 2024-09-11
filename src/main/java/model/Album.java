@@ -24,5 +24,6 @@ public class Album {
     private int releaseYear;
     private Genre genre;
 
-
+    @OneToOne(mappedBy = "record", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private StockTracker stockTracker;
 }
