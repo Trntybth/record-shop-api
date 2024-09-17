@@ -1,7 +1,7 @@
-package Service;
+package com.example.record_shop.packages.Service;
 
-import model.Album;
-import model.Genre;
+import com.example.record_shop.packages.model.Album;
+import com.example.record_shop.packages.model.Genre;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,7 +1,7 @@
-package Controller;
+package com.example.record_shop.packages.Controller;
 
-import Service.AlbumManagerService;
-import model.Album;
+import com.example.record_shop.packages.Service.AlbumManagerService;
+import com.example.record_shop.packages.model.Album;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +16,12 @@ public class AlbumController {
 
     @Autowired
     private AlbumManagerService albumManagerService;
+
+    @GetMapping("/test")
+    public String testEndpoint() {
+        return "Endpoint is working!";
+    }
+
 
     @GetMapping
     public ResponseEntity<List<Album>> getAll() {
@@ -35,4 +41,5 @@ public class AlbumController {
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(albumManagerService.addNewAlbum(album));
     }
+
 }

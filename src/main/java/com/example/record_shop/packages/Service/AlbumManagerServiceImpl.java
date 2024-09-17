@@ -1,16 +1,17 @@
-package Service;
+package com.example.record_shop.packages.Service;
 
-import Repository.AlbumRepository;
-import model.Album;
-import model.Genre;
+import com.example.record_shop.packages.Repository.AlbumRepository;
+import com.example.record_shop.packages.model.Album;
+import com.example.record_shop.packages.model.Genre;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class AlbumManagerServiceImpl implements AlbumManagerService {
-
 
     @Autowired
     AlbumRepository albumRepository;

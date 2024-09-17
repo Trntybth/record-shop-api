@@ -1,6 +1,6 @@
-package Repository;
+package com.example.record_shop.packages.Repository;
 
-import model.StockTracker;
+import com.example.record_shop.packages.model.StockTracker;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

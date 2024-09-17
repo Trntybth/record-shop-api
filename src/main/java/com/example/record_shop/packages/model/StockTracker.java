@@ -1,4 +1,4 @@
-package model;
+package com.example.record_shop.packages.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
