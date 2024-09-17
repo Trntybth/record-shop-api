@@ -27,6 +27,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.doNothing;
+
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
@@ -131,6 +133,13 @@ public class AlbumControllerTest {
                 .andExpect(jsonPath("$.title").value("Wolf"))
                 .andExpect(jsonPath("$.releaseYear").value(2013));
 
+    }
+    @Test
+    public void testDeleteAlbum() throws Exception {
+        doNothing().when(albumManagerService).deleteAlbumById(anyLong());
+
+        mockMvc.perform(delete("/api/v1/records/1"))
+                .andExpect(status().isNoContent());
     }
 }
 
