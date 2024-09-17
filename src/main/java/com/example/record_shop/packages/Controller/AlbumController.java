@@ -42,4 +42,10 @@ public class AlbumController {
         return ResponseEntity.status(HttpStatus.CREATED).body(albumManagerService.addNewAlbum(album));
     }
 
+    @PutMapping("/api/v1/records/{id}")
+    public ResponseEntity<Album> updateAlbum(@PathVariable Long id, @RequestBody Album album) {
+        Album updatedAlbum = albumManagerService.updateAlbumDetails(id, album);
+        return ResponseEntity.ok(updatedAlbum);
+    }
+
 }
