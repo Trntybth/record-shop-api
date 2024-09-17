@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
@@ -46,6 +47,12 @@ public class AlbumController {
     public ResponseEntity<Album> updateAlbum(@PathVariable Long id, @RequestBody Album album) {
         Album updatedAlbum = albumManagerService.updateAlbumDetails(id, album);
         return ResponseEntity.ok(updatedAlbum);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteAlbum(@PathVariable Long id) {
+        albumManagerService.deleteAlbumById(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
