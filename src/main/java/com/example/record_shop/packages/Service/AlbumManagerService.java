@@ -18,6 +18,6 @@ public interface AlbumManagerService {
     Optional<Record> getAlbumByName(String name);
     Album addNewAlbum(Album album);
     Album updateAlbumDetails(Long id, Album album);
-    int deleteAlbumById(Long id);
+    void deleteAlbumById(Long id);
 
 }
