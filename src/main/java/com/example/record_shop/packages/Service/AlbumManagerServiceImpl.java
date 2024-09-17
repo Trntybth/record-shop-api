@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -60,9 +61,26 @@ public class AlbumManagerServiceImpl implements AlbumManagerService {
     }
 
     @Override
-    public Album updateAlbumDetails(Long id, Album album) {
-        return null;
+    public Album updateAlbumDetails(Long id, Album albumDetails) {
+        Optional<Album> optionalAlbum = albumRepository.findById(id);
+
+        if (optionalAlbum.isPresent()) {
+            Album existingAlbum = optionalAlbum.get();
+
+            // Update the existing album with new details
+            existingAlbum.setTitle(albumDetails.getTitle());
+            existingAlbum.setArtist(albumDetails.getArtist());
+            existingAlbum.setReleaseYear(albumDetails.getReleaseYear());
+            existingAlbum.setGenre(albumDetails.getGenre());
+
+            // Save the updated album
+            return albumRepository.save(existingAlbum);
+        } else {
+            // Handle the case where the album does not exist
+            throw new NoSuchElementException("Album not found with the entered ID: " + id);
+        }
     }
+
 
     @Override
     public int deleteAlbumById(Long id) {
